@@ -35,7 +35,8 @@ To use this image in an existing WordPress project:
         ssl_certificate     /etc/ssl/your-project.test+1.pem;
         ssl_certificate_key /etc/ssl/your-project.test+1-key.pem;
       ```
-1. Adjust your project wp-config.php file to use the database 
+1. Adjust your project `wp-config.php` file to use the database. Ensure the value for
+constant `DB_HOST` is `db:3306`.
 1. Ensure your `/etc/hosts` file contains `127.0.0.1 your-project.test`
 2. Run `docker-compose up` from the project root directory.
 
