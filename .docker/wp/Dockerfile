@@ -1,6 +1,8 @@
 ARG PHP_VERSION
 
-FROM wordpress:php${PHP_VERSION}-fpm-alpine
+
+
+FROM wordpress:php${PHP_VERSION:-8.0}-fpm-alpine
 
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
   && pecl install xdebug \
