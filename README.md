@@ -14,7 +14,7 @@ This repository contains a local WordPress environment Docker setup based on:
 To use this local environment, you need:
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-2. Install [mkcert](https://github.com/FiloSottile/mkcert#macos): `brew install
+1. Install [mkcert](https://github.com/FiloSottile/mkcert#macos): `brew install
 mkcert`
 
 ## Usage
@@ -31,13 +31,16 @@ To use this image in an existing WordPress project:
    1. Run `mkcert your-project.test localhost`
    1. Edit the `nginx/nginx.config` file and change these two lines to use the
       certificate you created in the previous point:
-      ```
+
+      ```text
         ssl_certificate     /etc/ssl/your-project.test+1.pem;
         ssl_certificate_key /etc/ssl/your-project.test+1-key.pem;
       ```
-1. Adjust your project wp-config.php file to use the database 
+
+1. Adjust your project `wp-config.php` file to use the database. Ensure the value for
+constant `DB_HOST` is `db:3306`.
 1. Ensure your `/etc/hosts` file contains `127.0.0.1 your-project.test`
-2. Run `docker-compose up` from the project root directory.
+1. Run `docker-compose up` from the project root directory.
 
 ## How to Use WP CLI
 
@@ -84,4 +87,3 @@ this `launch.json` settings:
 
 To use Mailhog, you have to install and activate the mailhog-plugin.
 Then you can simply visit http://your-project.test:8025.
-
