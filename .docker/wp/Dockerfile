@@ -11,6 +11,7 @@ RUN sed -i "s/;max_input_vars = 1000/max_input_vars = ${PHP_MAX_INPUT_VARS}/" /u
 RUN sed -i "s/memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}/" /usr/local/etc/php/php.ini
 RUN sed -i "s/max_execution_time = 30/max_execution_time = ${PHP_MAX_EXECUTION_TIME}/" /usr/local/etc/php/php.ini
 
+RUN apk add --update linux-headers
 
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
   && pecl install xdebug \
