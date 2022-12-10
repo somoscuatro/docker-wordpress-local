@@ -25,7 +25,10 @@ services:
       context: .
       dockerfile: .docker/wp/Dockerfile
       args:
-        PHP_VERSION: ${PHP_VERSION}
+        PHP_VERSION: ${PHP_VERSION:-8.1}
+        PHP_MAX_INPUT_VARS: ${PHP_MAX_INPUT_VARS:-4000}
+        PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-1024M}
+        PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-60}
     restart: always
     environment:
       WORDPRESS_DB_HOST: ${NAME}-db:3306
@@ -61,17 +64,14 @@ services:
 
   cli:
     container_name: ${NAME}-cli
-    image: wordpress:cli-php${PHP_VERSION}
+    image: wordpress:cli-php${PHP_VERSION:-8.1}
     volumes_from:
       - wp
     links:
       - db
-    environment:
-      WORDPRESS_DB_HOST: ${NAME}-db:3306
-      WORDPRESS_DB_USER: ${DB_USER}
-      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${DB_NAME}
-    entrypoint: wp  
+    env_file:
+      - .env
+    entrypoint: wp
     command: "--info"
     networks:
       - internal
@@ -80,7 +80,7 @@ services:
     container_name: ${NAME}-mailhog
     image: mailhog/mailhog
     restart: always
-    ports: 
+    ports:
       - 1025:1025
       - 8025:8025
     networks:
