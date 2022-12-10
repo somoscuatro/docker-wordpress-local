@@ -1,8 +1,16 @@
 ARG PHP_VERSION
 
+FROM wordpress:php${PHP_VERSION}-fpm-alpine
 
+ARG PHP_MAX_INPUT_VARS
+ARG PHP_MEMORY_LIMIT
+ARG PHP_MAX_EXECUTION_TIME
 
-FROM wordpress:php${PHP_VERSION:-8.0}-fpm-alpine
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+RUN sed -i "s/;max_input_vars = 1000/max_input_vars = ${PHP_MAX_INPUT_VARS}/" /usr/local/etc/php/php.ini
+RUN sed -i "s/memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}/" /usr/local/etc/php/php.ini
+RUN sed -i "s/max_execution_time = 30/max_execution_time = ${PHP_MAX_EXECUTION_TIME}/" /usr/local/etc/php/php.ini
+
 
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
   && pecl install xdebug \
