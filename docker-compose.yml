@@ -14,13 +14,11 @@ services:
       MARIADB_DATABASE: ${DB_NAME}
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASSWORD}
-    networks:
-      - internal
 
   wp:
     container_name: ${NAME}-wp
     depends_on:
-       - db
+      - db
     build:
       context: .
       dockerfile: .docker/wp/Dockerfile
@@ -37,8 +35,6 @@ services:
       - .env
     volumes:
       - ./:/var/www/html
-    networks:
-      - internal
 
   nginx:
     container_name: ${NAME}-nginx
@@ -57,8 +53,6 @@ services:
       - ./:/var/www/html
       - ./.docker/certs:/etc/ssl
       - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    networks:
-      - internal
 
   cli:
     container_name: ${NAME}-cli
@@ -71,8 +65,6 @@ services:
       - .env
     entrypoint: wp
     command: "--info"
-    networks:
-      - internal
 
   mailhog:
     container_name: ${NAME}-mailhog
@@ -81,11 +73,7 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
-    networks:
-      - internal
 
-networks:
-  internal:
 volumes:
   db:
   certs:
