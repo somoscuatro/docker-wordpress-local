@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile: .docker/wp/Dockerfile
       args:
-        PHP_VERSION: ${PHP_VERSION:-8.1}
+        PHP_VERSION: ${PHP_VERSION:-8.2}
         PHP_MAX_INPUT_VARS: ${PHP_MAX_INPUT_VARS:-4000}
         PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-1024M}
         PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-60}
