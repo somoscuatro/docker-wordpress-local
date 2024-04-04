@@ -90,7 +90,14 @@ this `launch.json` settings:
 }
 ```
 
+You can enable/disable the Xdebug profiler by adding `profile` to the
+`XDEBUG_MODE` variable in `.env`, i.e. `XDEBUG_MODE=debug,profile`.
+
+By default, requests end up in the `./profiling` directory. The files begin with
+`cachegrind.out.` and are suffixed with the process ID.
+
 ## How to Use Mailhog
 
-To use Mailhog, you have to install and activate the mailhog-plugin.
-Then you can simply visit http://your-project.test:8025.
+To use Mailhog, you have to install and activate [our mailhog plugin for
+WordPres](https://github.com/somoscuatro/mailhog). Then you can simply visit
+http://your-project.test:8025.
