@@ -24,7 +24,7 @@ To use this image in an existing WordPress project:
 1. Copy the following to your project root directory:
    1. The `docker-compose.yml` file.
    1. The `.docker` folder.
-   1. The `.env.example` file. Rename it to `.env`.
+   1. The `.env.sample` file. Rename it to `.env`.
 1. Edit the `.env` environment constants with your project details.
 1. Go to your project root directory and move into the `.docker` folder:
    1. Create a certs folder and move into it: `mkdir certs && cd certs`
