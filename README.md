@@ -59,7 +59,10 @@ Tip: You can create a shell alias: `alias dwp='docker-compose run --rm cli'`.
 ## How to Switch PHP Version
 
 To switch the PHP version, change the related PHP_VERSION variable in the `.env`
-file. Available versions are `8.1`, `8.0` and `7.4`.
+file. Available versions are `8.3`, `8.2`, `8.0` and `7.4`. See [Docker Hub
+wordpress image
+page](https://hub.docker.com/_/wordpress/tags?page=&page_size=&ordering=&name=cli-php7)
+for more info about available tags.
 
 ## How to Enable HTTPS
 
