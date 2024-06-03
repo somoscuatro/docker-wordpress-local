@@ -4,17 +4,18 @@
 services:
   db:
     container_name: ${NAME}-db
-    image: mariadb:10.3
+    image: mysql:8.0
     ports:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
 
   wp:
     container_name: ${NAME}-wp
