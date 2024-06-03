@@ -58,7 +58,7 @@ services:
 
   cli:
     container_name: ${NAME}-cli
-    image: wordpress:cli-php${PHP_VERSION:-8.1}
+    image: wordpress:cli-php${PHP_VERSION:-8.2}
     volumes_from:
       - wp
     links:
