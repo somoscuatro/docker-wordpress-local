@@ -19,3 +19,7 @@ RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
   && apk del pcre-dev ${PHPIZE_DEPS}
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apk add --update nodejs npm
+RUN npm install -g pnpm
+RUN pnpm --version
