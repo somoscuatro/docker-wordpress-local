@@ -9,6 +9,8 @@ This repository contains a local WordPress environment Docker setup based on:
 - [Mailhog](https://github.com/mailhog/MailHog)
 - [Xdebug](https://xdebug.org/)
 
+Composer, Node and PNPM are also included as part of the WordPress image.
+
 ## Prerequisites
 
 To use this local environment, you need:
@@ -55,6 +57,41 @@ To use WP CLI, run `docker-compose run --rm cli` followed by the WP CLI command.
 For example: `docker-compose run --rm cli plugin list`.
 
 Tip: You can create a shell alias: `alias dwp='docker-compose run --rm cli'`.
+
+## How to Use Composer
+
+To execute Composer commands within the Docker environment, use the following syntax:
+
+`docker-compose run --rm wp composer [command]`
+
+If you need to run Composer commands in a specific directory, you can utilize
+the `--working-dir` option to designate the target directory. This is
+particularly useful when you want to manage dependencies located
+in a subdirectory of your container.
+
+For example, to install Composer dependencies for the WordPress theme
+[sc-starter-theme](https://github.com/somoscuatro/sc-starter-theme), run:
+
+`docker-compose run --rm wp composer install
+--working-dir=wp-content/themes/sc-starter-theme`
+
+## How to Use PNPM
+
+To execute PNPM commands within the Docker environment, use the following
+syntax:
+
+`docker-composer run --rm wp pnpm [command]`
+
+If you need to run PNPM commands in a specific directory, you can utilize the
+`--dir` option to designate the target directory. This is particularly useful
+when you want to manage dependencies located in a subdirectory of your
+container.
+
+For example, to build assets for the WordPress theme
+[sc-starter-theme](https://github.com/somoscuatro/sc-starter-theme), run:
+
+`docker-compose run --rm wp pnpm --dir=wp-content/themes/sc-starter-theme run
+build`
 
 ## How to Switch PHP Version
 
