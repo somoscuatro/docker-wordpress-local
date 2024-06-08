@@ -59,7 +59,14 @@ services:
 
   cli:
     container_name: ${NAME}-cli
-    image: wordpress:cli-php${PHP_VERSION:-8.2}
+    build:
+      context: .
+      dockerfile: .docker/wp-cli/Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.1}
+    environment:
+      XDEBUG_MODE: develop,debug
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
     volumes_from:
       - wp
     links:
