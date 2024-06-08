@@ -116,9 +116,11 @@ the Usage section).
 
 ## How to Use Xdebug
 
-Xdebug is enabled by default. To use it with Visual Studio Code, you have to
-include `?XDEBUG_SESSION=TRUE` in the URL you are browsing, and you have to use
-this `launch.json` settings:
+Xdebug comes pre-installed and activated in the wp and cli containers, allowing
+debugging of website requests and WP-CLI commands.
+
+To use Xdebug with Visual Studio Code, you have to include `?XDEBUG_SESSION=TRUE`
+in the URL you are browsing, and you have to use this `launch.json` settings:
 
 ```JSON
 {
@@ -136,12 +138,23 @@ this `launch.json` settings:
   ]
 }
 ```
+As an alternative to the `?XDEBUG_SESSION=TRUE` parameter in the URL, you can use
+a browser extension like Xdebug Helper for [Chrome](https://chromewebstore.google.com/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc),
+[Firefox](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/),
+[Edge](https://microsoftedge.microsoft.com/addons/detail/xdebug-helper/ggnngifabofaddiejjeagbaebkejomen)
+or [Xdebug Key for Safari](https://apps.apple.com/bg/app/xdebug-key/id1441712067?mt=12), 
+
+To initiate Xdebug for WP-CLI commands, you need to set environment variable `XDEBUG_SESSION=true` inside
+the cli Docker container. E.g.
+```shell
+docker-compose run -e XDEBUG_SESSION=true --rm cli wp_cli_command_to_debug
+```
 
 You can enable/disable the Xdebug profiler by adding `profile` to the
 `XDEBUG_MODE` variable in `.env`, i.e. `XDEBUG_MODE=debug,profile`.
 
-By default, requests end up in the `./profiling` directory. The files begin with
-`cachegrind.out.` and are suffixed with the process ID.
+Profiling data files are, by default, stored in the ./profiling directory. These files are prefixed
+with cachegrind.out. and appended with the respective process ID.
 
 ## How to Use Mailhog
 
