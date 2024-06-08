@@ -109,7 +109,10 @@ the Usage section).
 
 ## How to Use Xdebug
 
-Xdebug is enabled by default. To use it with Visual Studio Code, you have to
+Xdebug comes pre-installed and activated in the wp and cli containers, allowing
+debugging of website requests and WP-CLI commands.
+
+To use Xdebug it with Visual Studio Code, you have to
 include `?XDEBUG_SESSION=TRUE` in the URL you are browsing, and you have to use
 this `launch.json` settings:
 
