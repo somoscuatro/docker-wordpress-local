@@ -4,7 +4,7 @@
 services:
   db:
     container_name: ${NAME}-db
-    image: mysql:8.0
+    image: mysql:9.5
     ports:
       - 3306:3306
     volumes:
@@ -15,7 +15,6 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    command: --default-authentication-plugin=mysql_native_password
 
   wp:
     container_name: ${NAME}-wp
