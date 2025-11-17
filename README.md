@@ -75,14 +75,21 @@ For example, to install Composer dependencies for the WordPress theme
 `docker-compose run --rm wp composer install
 --working-dir=wp-content/themes/sc-starter-theme`
 
-## How to Use PNPM
+## How to Use Package Managers
 
-To execute PNPM commands within the Docker environment, use the following
+Our WordPress image comes with all the major package managers pre-installed:
+[bun](https://bun.com/), [pnpm](https://pnpm.io/), [yarn](https://yarnpkg.com/) and [npm](https://www.npmjs.com/).
+
+To execute a package manager commands within the Docker environment, use the following
 syntax:
 
-`docker-composer run --rm wp pnpm [command]`
+`docker-compose run --rm wp <package-manager> <command>`
 
-If you need to run PNPM commands in a specific directory, you can utilize the
+For example:
+
+`docker-composer run --rm wp bun run build`
+
+Some package managers allow commands to be run in a specific directory, you can utilize the
 `--dir` option to designate the target directory. This is particularly useful
 when you want to manage dependencies located in a subdirectory of your
 container.
@@ -90,7 +97,7 @@ container.
 For example, to build assets for the WordPress theme
 [sc-starter-theme](https://github.com/somoscuatro/sc-starter-theme), run:
 
-`docker-compose run --rm wp pnpm --dir=wp-content/themes/sc-starter-theme run
+`docker-compose run --rm wp bun --dir=wp-content/themes/sc-starter-theme run
 build`
 
 ## How to Switch PHP Version
