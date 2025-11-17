@@ -13,6 +13,8 @@ RUN sed -i "s/max_execution_time = 30/max_execution_time = ${PHP_MAX_EXECUTION_T
 
 RUN apk add --update linux-headers
 
+RUN apk add bash unzip
+
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
   && pecl install xdebug \
   && docker-php-ext-enable xdebug \
@@ -23,5 +25,14 @@ RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN apk add --update nodejs npm
+
+RUN curl -fsSL https://bun.sh/install | bash \
+ && mv /root/.bun /usr/local/bun
+
+ENV BUN_INSTALL="/usr/local/bun"
+ENV PATH="${BUN_INSTALL}/bin:${PATH}"
+
+RUN bun --version
+
 RUN npm install -g pnpm
 RUN pnpm --version
