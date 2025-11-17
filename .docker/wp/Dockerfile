@@ -36,3 +36,6 @@ RUN bun --version
 
 RUN npm install -g pnpm
 RUN pnpm --version
+
+RUN npm install -g yarn
+RUN yarn --version
