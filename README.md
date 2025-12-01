@@ -62,7 +62,7 @@ Tip: You can create a shell alias: `alias dwp='docker-compose run --rm cli'`.
 
 To execute Composer commands within the Docker environment, use the following syntax:
 
-`docker-compose run --rm wp composer [command]`
+`docker-compose exec wp composer [command]`
 
 If you need to run Composer commands in a specific directory, you can utilize
 the `--working-dir` option to designate the target directory. This is
@@ -72,8 +72,7 @@ in a subdirectory of your container.
 For example, to install Composer dependencies for the WordPress theme
 [sc-starter-theme](https://github.com/somoscuatro/sc-starter-theme), run:
 
-`docker-compose run --rm wp composer install
---working-dir=wp-content/themes/sc-starter-theme`
+`docker-compose exec wp composer install --working-dir=wp-content/themes/sc-starter-theme`
 
 ## How to Use Package Managers
 
@@ -83,22 +82,22 @@ Our WordPress image comes with all the major package managers pre-installed:
 To execute a package manager commands within the Docker environment, use the following
 syntax:
 
-`docker-compose run --rm wp <package-manager> <command>`
+`docker-compose exec wp <package-manager> <command>`
 
 For example:
 
-`docker-composer run --rm wp bun run build`
+`docker-compose exec wp bun run build`
 
-Some package managers allow commands to be run in a specific directory, you can utilize the
-`--dir` option to designate the target directory. This is particularly useful
-when you want to manage dependencies located in a subdirectory of your
+Some package managers allow commands to be run in a specific directory.
+For instance, you can use options like `--dir` (for pnpm), `--cwd` (for bun, yarn)
+or `--prefix` (for npm) to designate the target directory. This is particularly
+useful when you want to manage dependencies located in a subdirectory of your
 container.
 
 For example, to build assets for the WordPress theme
 [sc-starter-theme](https://github.com/somoscuatro/sc-starter-theme), run:
 
-`docker-compose run --rm wp bun --dir=wp-content/themes/sc-starter-theme run
-build`
+`docker-compose exec wp bun --cwd wp-content/themes/sc-starter-theme run build`
 
 ## How to Switch PHP Version
 
@@ -138,14 +137,16 @@ in the URL you are browsing, and you have to use this `launch.json` settings:
   ]
 }
 ```
+
 As an alternative to the `?XDEBUG_SESSION=TRUE` parameter in the URL, you can use
 a browser extension like Xdebug Helper for [Chrome](https://chromewebstore.google.com/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc),
 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/),
 [Edge](https://microsoftedge.microsoft.com/addons/detail/xdebug-helper/ggnngifabofaddiejjeagbaebkejomen)
-or [Xdebug Key for Safari](https://apps.apple.com/bg/app/xdebug-key/id1441712067?mt=12), 
+or [Xdebug Key for Safari](https://apps.apple.com/bg/app/xdebug-key/id1441712067?mt=12),
 
 To initiate Xdebug for WP-CLI commands, you need to set environment variable `XDEBUG_SESSION=true` inside
 the cli Docker container. E.g.
+
 ```shell
 docker-compose run -e XDEBUG_SESSION=true --rm cli wp_cli_command_to_debug
 ```
@@ -160,4 +161,4 @@ with cachegrind.out. and appended with the respective process ID.
 
 To use Mailhog, you have to install and activate [our mailhog plugin for
 WordPres](https://github.com/somoscuatro/mailhog). Then you can simply visit
-http://your-project.test:8025.
+[https://your-project.test:8025](https://your-project.test:8025).
