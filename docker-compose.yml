@@ -38,7 +38,6 @@ services:
       - .env
     volumes:
       - ./:/var/www/html
-      - ./.docker/certs:/etc/ssl
       - ./profiling:/tmp/profiling
 
   nginx:
